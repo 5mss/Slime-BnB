@@ -1,4 +1,4 @@
-package BnB;
+package bnb;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,25 +6,25 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class StartFrame extends JFrame{
-	public int width;
-	public int height;
-	public int buttonCount;
-	public JButton startButton;
-	public JButton musicButton;
-	public JButton soundButton;
+	int width;
+	int height;
+	int buttonCount;
+	JButton startButton;
+	JButton musicButton;
+	JButton soundButton;
 	private ImageIcon soundOn;
 	private ImageIcon soundOff;
 	private ImageIcon musicOn;
 	private ImageIcon musicOff;
 	
-	public StartFrame() {
+	public StartFrame(int w, int h) {
 		super("Slime BnB");
-	}
-	public void init(int w, int h) {
-		// initialize member variables
 		width = w;
 		height = h;
 		buttonCount = 2;
+	}
+	public void init() {
+		// initialize member variables
 		setSize(width, height + 10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -82,8 +82,8 @@ public class StartFrame extends JFrame{
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout());
 		p.setOpaque(false);
-		int buttonWidth = 100;
-		int buttonHeight = 100;
+		int buttonWidth = width/12;
+		int buttonHeight = width/12;
 		
 		//set Image icons
 		soundOn = new ImageIcon(this.getClass().getResource("/res/start_frame/sound_on.png"));
@@ -126,8 +126,8 @@ public class StartFrame extends JFrame{
 	
 	
 	public static void main(String[] args) {
-		StartFrame f = new StartFrame();
-		f.init(1200, 675);
+		StartFrame f = new StartFrame(1200, 800);
+		f.init();
 		f.setVisible(true);
 	}
 

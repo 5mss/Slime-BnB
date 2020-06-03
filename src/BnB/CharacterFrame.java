@@ -7,16 +7,16 @@ import javax.swing.*;
 import utils.*;
 
 public class CharacterFrame extends JFrame{
-	public int width;
-	public int height;
-	public int iconWidth;
-	public int iconHeight;
-	public int players;
-	public Theme theme;
-	public int bombType;
-	public SlimeType characterType[];
-	public JButton backButton;
-	public JButton startButton;
+	int width;
+	int height;
+	int iconWidth;
+	int iconHeight;
+	int players;
+	Theme theme;
+	int bombType;
+	SlimeType characterType[];
+	JButton backButton;
+	JButton startButton;
 	private ImageLabel bgLabel;
 	private ImageIcon bgIcon;
 	private ImageIcon slimeGreenIcon, slimePinkIcon, slimeBlueIcon, slimeHatIcon;
@@ -56,6 +56,7 @@ public class CharacterFrame extends JFrame{
 		characterType[1] = SlimeType.PINK;
 		name[1] = new JLabel("Pink Slime");
 	}
+	
 	public CharacterFrame(OptionFrame f) {
 		super("Slime BnB");
 		width = f.width;
@@ -103,6 +104,14 @@ public class CharacterFrame extends JFrame{
 			throw new IllegalArgumentException("Unexpected value: " + theme);
 		}
 
+		bgLabel = new ImageLabel(bgIcon);
+		bgLabel.setAlpha(0.5f);
+		bgLabel.setSize(width, height);
+		getLayeredPane().add(bgLabel, new Integer(Integer.MIN_VALUE));
+		
+		contentPane.setOpaque(false);
+	    contentPane.setLayout(new BorderLayout());
+	    contentPane.setSize(width, height);
 		// get character icons
 		slimeGreenIcon = new ImageIcon(this.getClass().getResource("/res/characters/green_slime/green_slime_front.gif"));
 		slimePinkIcon = new ImageIcon(this.getClass().getResource("/res/characters/pink_slime/pink_slime_front.gif"));
@@ -112,16 +121,7 @@ public class CharacterFrame extends JFrame{
 		slimePinkIcon.setImage(slimePinkIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		slimeBlueIcon.setImage(slimeBlueIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		slimeHatIcon.setImage(slimeHatIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
-
-
-		bgLabel = new ImageLabel(bgIcon);
-		bgLabel.setAlpha(0.5f);
-		bgLabel.setSize(width, height);
-		getLayeredPane().add(bgLabel, new Integer(Integer.MIN_VALUE));
 		
-		contentPane.setOpaque(false);
-	    contentPane.setLayout(new BorderLayout());
-	    contentPane.setSize(width, height);
 		
 		// set title
 	    JLabel titleLabel = new JLabel("     S  l  i  m  e           B    n    B     ");
@@ -408,7 +408,7 @@ public class CharacterFrame extends JFrame{
 
 	
 	public static void main(String[] args) {
-		CharacterFrame f = new CharacterFrame(1200, 720);
+		CharacterFrame f = new CharacterFrame(1200, 800);
 		f.init();
 		f.setVisible(true);
 	}

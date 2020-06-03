@@ -1,21 +1,20 @@
-package BnB;
+package bnb;
 
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 import javax.swing.*;
 import utils.*;
 
 public class OptionFrame extends JFrame{
-	public int width;
-	public int height;
-	public int players;
-	public int enemies;
-	public Theme theme;
-	public Difficulty difficulty;
-	public JButton backButton;
-	public JButton nextButton;
+	int width;
+	int height;
+	int players;
+	int enemies;
+	Theme theme;
+	Difficulty difficulty;
+	JButton backButton;
+	JButton nextButton;
 	private ImageLabel bgLabel;
 	private JRadioButton players1, players2;
 	private JRadioButton enemies0, enemies1, enemies2, enemies3;
@@ -23,14 +22,11 @@ public class OptionFrame extends JFrame{
 	private JRadioButton diffEasy, diffNormal, diffHard;
 	private int rbCount;
 	private ImageIcon bgNeon, bgLego, bgPsychedelic;
+	private ButtonGroup playersGroup, enemiesGroup;
 	
 	
-	public OptionFrame() {
+	public OptionFrame(int w, int h) {
 		super("Slime BnB");
-	}
-	
-	public void init(int w, int h) {
-		// initialize variables
 		width = w;
 		height = h;
 		players = 1;
@@ -38,7 +34,9 @@ public class OptionFrame extends JFrame{
 		rbCount = 12;
 		theme = Theme.NEON;
 		difficulty = Difficulty.EASY;
-
+	}
+	
+	public void init() {
 		// set window
 		setSize(width, height + 10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,7 +99,7 @@ public class OptionFrame extends JFrame{
 		enemies2.addItemListener(enemiesButtonHandler);
 		enemies0.addItemListener(enemiesButtonHandler);
 		enemies3.addItemListener(enemiesButtonHandler);
-		ButtonGroup enemiesGroup = new ButtonGroup();
+		enemiesGroup = new ButtonGroup();
 		enemiesGroup.add(enemies1);
 		enemiesGroup.add(enemies2);
 		enemiesGroup.add(enemies0);
@@ -123,7 +121,7 @@ public class OptionFrame extends JFrame{
 		players2 = new JRadioButton("2");
 		players1.addItemListener(playersButtonHandler);
 		players2.addItemListener(playersButtonHandler);
-		ButtonGroup playersGroup = new ButtonGroup();
+		playersGroup = new ButtonGroup();
 		playersGroup.add(players1);
 		playersGroup.add(players2);
 		playersGroup.setSelected(players1.getModel(), true);
@@ -216,11 +214,13 @@ public class OptionFrame extends JFrame{
 				players = 1;
 				enemies0.setVisible(false);
 				enemies3.setVisible(true);
+				enemiesGroup.setSelected(enemies3.getModel(), true);
 			}
 			else if(e.getSource() == players2) {
 				players = 2;	
 				enemies0.setVisible(true);
 				enemies3.setVisible(false);
+				enemiesGroup.setSelected(enemies2.getModel(), true);
 			}
 		}
 		
@@ -275,8 +275,8 @@ public class OptionFrame extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		OptionFrame f = new OptionFrame();
-		f.init(1200, 675);
+		OptionFrame f = new OptionFrame(1200, 800);
+		f.init();
 		f.setVisible(true);
 	}
 
