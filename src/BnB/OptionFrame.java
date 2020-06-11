@@ -7,6 +7,8 @@ import javax.swing.*;
 import utils.*;
 
 public class OptionFrame extends JFrame{
+	public WindowManager windowManager;
+	
 	int width;
 	int height;
 	int players;
@@ -36,6 +38,18 @@ public class OptionFrame extends JFrame{
 		difficulty = Difficulty.EASY;
 	}
 	
+	public OptionFrame(int w, int h, StartFrame f) {
+		super("Slime BnB");
+		width = w;
+		height = h;
+		players = 1;
+		enemies = 3;
+		rbCount = 12;
+		theme = Theme.NEON;
+		difficulty = Difficulty.EASY;
+		windowManager = f.windowManager;
+	}
+	
 	public void init() {
 		// set window
 		setSize(width, height + 10);
@@ -45,11 +59,11 @@ public class OptionFrame extends JFrame{
 		
 		// set background image
 		JPanel contentPane = (JPanel)getContentPane();
-		bgNeon = new ImageIcon(this.getClass().getResource("/res/themes/neon/theme_image.jpg"));
+		bgNeon = new ImageIcon(this.getClass().getClassLoader().getResource("themes/neon/theme_image.jpg"));
 		bgNeon.setImage(bgNeon.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
-		bgLego = new ImageIcon(this.getClass().getResource("/res/themes/lego/theme_image.jpg"));
+		bgLego = new ImageIcon(this.getClass().getClassLoader().getResource("themes/lego/theme_image.jpg"));
 		bgLego.setImage(bgLego.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
-		bgPsychedelic = new ImageIcon(this.getClass().getResource("/res/themes/psychedelic/theme_image.jpg"));
+		bgPsychedelic = new ImageIcon(this.getClass().getClassLoader().getResource("themes/psychedelic/theme_image.jpg"));
 		bgPsychedelic.setImage(bgPsychedelic.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 		
 		bgLabel = new ImageLabel(bgNeon);
@@ -214,13 +228,15 @@ public class OptionFrame extends JFrame{
 				players = 1;
 				enemies0.setVisible(false);
 				enemies3.setVisible(true);
-				enemiesGroup.setSelected(enemies3.getModel(), true);
+				if(enemiesGroup.getSelection() == enemies0.getModel())
+					enemiesGroup.setSelected(enemies3.getModel(), true);
 			}
 			else if(e.getSource() == players2) {
 				players = 2;	
 				enemies0.setVisible(true);
 				enemies3.setVisible(false);
-				enemiesGroup.setSelected(enemies2.getModel(), true);
+				if(enemiesGroup.getSelection() == enemies3.getModel())
+					enemiesGroup.setSelected(enemies2.getModel(), true);
 			}
 		}
 		
@@ -274,11 +290,11 @@ public class OptionFrame extends JFrame{
 		}
 	}
 
-	public static void main(String[] args) {
-		OptionFrame f = new OptionFrame(1200, 800);
-		f.init();
-		f.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		OptionFrame f = new OptionFrame(1200, 800);
+//		f.init();
+//		f.setVisible(true);
+//	}
 
 }
 

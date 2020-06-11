@@ -6,16 +6,18 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class StartFrame extends JFrame{
+	public WindowManager windowManager;
+	
 	int width;
 	int height;
 	int buttonCount;
 	JButton startButton;
 	JButton musicButton;
 	JButton soundButton;
-	private ImageIcon soundOn;
-	private ImageIcon soundOff;
-	private ImageIcon musicOn;
-	private ImageIcon musicOff;
+	ImageIcon soundOn;
+	ImageIcon soundOff;
+	ImageIcon musicOn;
+	ImageIcon musicOff;
 	
 	public StartFrame(int w, int h) {
 		super("Slime BnB");
@@ -23,6 +25,16 @@ public class StartFrame extends JFrame{
 		height = h;
 		buttonCount = 2;
 	}
+	
+	public StartFrame(int w, int h, WindowManager wm) {
+		super("Slime BnB");
+		width = w;
+		height = h;
+		buttonCount = 2;
+		windowManager = wm;
+	}
+	
+	
 	public void init() {
 		// initialize member variables
 		setSize(width, height + 10);
@@ -33,7 +45,7 @@ public class StartFrame extends JFrame{
 		JPanel contentPane = (JPanel)getContentPane();
 		
 		// set background image
-		ImageIcon bg = new ImageIcon(this.getClass().getResource("/res/start_frame/mainBackground.gif"));
+		ImageIcon bg = new ImageIcon(this.getClass().getClassLoader().getResource("start_frame/mainBackground.gif"));
 		bg.setImage(bg.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 		JLabel bgLabel = new JLabel(bg);
 		bgLabel.setSize(width, height);
@@ -86,10 +98,10 @@ public class StartFrame extends JFrame{
 		int buttonHeight = width/12;
 		
 		//set Image icons
-		soundOn = new ImageIcon(this.getClass().getResource("/res/start_frame/sound_on.png"));
-		soundOff = new ImageIcon(this.getClass().getResource("/res/start_frame/sound_off.png"));
-		musicOn = new ImageIcon(this.getClass().getResource("/res/start_frame/music_on.png"));
-		musicOff = new ImageIcon(this.getClass().getResource("/res/start_frame/music_off.png"));
+		soundOn = new ImageIcon(this.getClass().getClassLoader().getResource("start_frame/sound_on.png"));
+		soundOff = new ImageIcon(this.getClass().getClassLoader().getResource("start_frame/sound_off.png"));
+		musicOn = new ImageIcon(this.getClass().getClassLoader().getResource("start_frame/music_on.png"));
+		musicOff = new ImageIcon(this.getClass().getClassLoader().getResource("start_frame/music_off.png"));
 		soundOn.setImage(soundOn.getImage().getScaledInstance(buttonWidth, buttonHeight,Image.SCALE_DEFAULT ));
 		soundOff.setImage(soundOff.getImage().getScaledInstance(buttonWidth, buttonHeight,Image.SCALE_DEFAULT ));
 		musicOn.setImage(musicOn.getImage().getScaledInstance(buttonWidth, buttonHeight,Image.SCALE_DEFAULT ));
@@ -125,10 +137,10 @@ public class StartFrame extends JFrame{
 
 	
 	
-	public static void main(String[] args) {
-		StartFrame f = new StartFrame(1200, 800);
-		f.init();
-		f.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		StartFrame f = new StartFrame(1200, 800);
+//		f.init();
+//		f.setVisible(true);
+//	}
 
 }

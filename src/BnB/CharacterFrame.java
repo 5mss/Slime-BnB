@@ -7,6 +7,8 @@ import javax.swing.*;
 import utils.*;
 
 public class CharacterFrame extends JFrame{
+	public WindowManager windowManager;
+	
 	int width;
 	int height;
 	int iconWidth;
@@ -40,7 +42,7 @@ public class CharacterFrame extends JFrame{
 //		characterType = new SlimeType[1];
 //		name = new JLabel[1];
 //		characterType[0] = SlimeType.GREEN;
-//		name[0] = new JLabel("Green Slime");
+//		name[0] = new JLabel("Jellyfish");
 		
 		width = w;
 		height = h;
@@ -52,13 +54,14 @@ public class CharacterFrame extends JFrame{
 		characterType = new SlimeType[players];
 		name = new JLabel[players];
 		characterType[0] = SlimeType.GREEN;
-		name[0] = new JLabel("Green Slime");
+		name[0] = new JLabel("Jellyfish");
 		characterType[1] = SlimeType.PINK;
-		name[1] = new JLabel("Pink Slime");
+		name[1] = new JLabel("Panas");
 	}
 	
 	public CharacterFrame(OptionFrame f) {
 		super("Slime BnB");
+		windowManager = f.windowManager;
 		width = f.width;
 		height = f.height;
 		iconWidth = width/12;
@@ -69,10 +72,10 @@ public class CharacterFrame extends JFrame{
 		characterType = new SlimeType[players];
 		name = new JLabel[players];
 		characterType[0] = SlimeType.GREEN;
-		name[0] = new JLabel("Green Slime");
+		name[0] = new JLabel("Jellyfish");
 		if(players == 2) {
 			characterType[1] = SlimeType.PINK;
-			name[1] = new JLabel("Pink Slime"); 
+			name[1] = new JLabel("Panas"); 
 		}
 	}
 	
@@ -86,17 +89,17 @@ public class CharacterFrame extends JFrame{
 		JPanel contentPane = (JPanel)getContentPane();
 		switch (theme) {
 		case NEON: {	
-			bgIcon = new ImageIcon(this.getClass().getResource("/res/themes/neon/theme_image.jpg"));
+			bgIcon = new ImageIcon(this.getClass().getClassLoader().getResource("themes/neon/theme_image.jpg"));
 			bgIcon.setImage(bgIcon.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 			break;
 		}
 		case LEGO: {	
-			bgIcon = new ImageIcon(this.getClass().getResource("/res/themes/lego/theme_image.jpg"));
+			bgIcon = new ImageIcon(this.getClass().getClassLoader().getResource("themes/lego/theme_image.jpg"));
 			bgIcon.setImage(bgIcon.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 			break;
 		}
 		case PSYCHEDELIC: {	
-			bgIcon = new ImageIcon(this.getClass().getResource("/res/themes/psychedelic/theme_image.jpg"));
+			bgIcon = new ImageIcon(this.getClass().getClassLoader().getResource("themes/psychedelic/theme_image.jpg"));
 			bgIcon.setImage(bgIcon.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 			break;
 		}
@@ -113,10 +116,10 @@ public class CharacterFrame extends JFrame{
 	    contentPane.setLayout(new BorderLayout());
 	    contentPane.setSize(width, height);
 		// get character icons
-		slimeGreenIcon = new ImageIcon(this.getClass().getResource("/res/characters/green_slime/green_slime_front.gif"));
-		slimePinkIcon = new ImageIcon(this.getClass().getResource("/res/characters/pink_slime/pink_slime_front.gif"));
-		slimeBlueIcon = new ImageIcon(this.getClass().getResource("/res/characters/blue_slime/blue_slime_front.gif"));
-		slimeHatIcon = new ImageIcon(this.getClass().getResource("/res/characters/hat_slime/hat_slime_front.gif"));
+		slimeGreenIcon = new ImageIcon(this.getClass().getClassLoader().getResource("characters/green_slime/green_slime_front.gif"));
+		slimePinkIcon = new ImageIcon(this.getClass().getClassLoader().getResource("characters/pink_slime/pink_slime_front.gif"));
+		slimeBlueIcon = new ImageIcon(this.getClass().getClassLoader().getResource("characters/blue_slime/blue_slime_front.gif"));
+		slimeHatIcon = new ImageIcon(this.getClass().getClassLoader().getResource("characters/hat_slime/hat_slime_front.gif"));
 		slimeGreenIcon.setImage(slimeGreenIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		slimePinkIcon.setImage(slimePinkIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		slimeBlueIcon.setImage(slimeBlueIcon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
@@ -193,9 +196,9 @@ public class CharacterFrame extends JFrame{
 		buttonPanel.setOpaque(false);
 		buttonPanel.setLayout(new FlowLayout());
 		BombButtonHandler handler = new BombButtonHandler();
-		ImageIcon bomb0Icon = new ImageIcon(this.getClass().getResource("/res/bombs/b0.gif"));
-		ImageIcon bomb1Icon = new ImageIcon(this.getClass().getResource("/res/bombs/b1.gif"));
-		ImageIcon bomb2Icon = new ImageIcon(this.getClass().getResource("/res/bombs/b2.gif"));	
+		ImageIcon bomb0Icon = new ImageIcon(this.getClass().getClassLoader().getResource("bombs/b0.gif"));
+		ImageIcon bomb1Icon = new ImageIcon(this.getClass().getClassLoader().getResource("bombs/b1.gif"));
+		ImageIcon bomb2Icon = new ImageIcon(this.getClass().getClassLoader().getResource("bombs/b2.gif"));	
 		bomb0Icon.setImage(bomb0Icon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		bomb1Icon.setImage(bomb1Icon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
 		bomb2Icon.setImage(bomb2Icon.getImage().getScaledInstance(iconWidth, iconHeight,Image.SCALE_DEFAULT ));
@@ -236,7 +239,7 @@ public class CharacterFrame extends JFrame{
         flowlayout.setAlignment(FlowLayout.LEFT);
 		textPanel.setLayout(flowlayout);
 		JLabel characterLabel = new JLabel("     Choose P1 Character     ");
-		name[0] = new JLabel("Green Slime");
+		name[0] = new JLabel("Jellyfish");
 		textPanel.add(characterLabel);
 		textPanel.add(name[0]);
 
@@ -284,7 +287,7 @@ public class CharacterFrame extends JFrame{
         flowlayout.setAlignment(FlowLayout.LEFT);
 		textPanel.setLayout(flowlayout);
 		JLabel characterLabel = new JLabel("     Choose P2 Character     ");
-		name[1] = new JLabel("Pink Slime");
+		name[1] = new JLabel("Panas");
 		textPanel.add(characterLabel);
 		textPanel.add(name[1]);
 
@@ -350,36 +353,40 @@ public class CharacterFrame extends JFrame{
 				if(setP1) {
 					slimeGreen1.setVisible(false);
 					slimeLabels1[0].setVisible(false);
-					slimeGroup1.setSelected(slimePink1.getModel(), true);
+					if(slimeGroup1.getSelection() == slimeGreen1.getModel())
+						slimeGroup1.setSelected(slimePink1.getModel(), true);
 				}
-				name[0].setText("Green Slime");
+				name[0].setText("Jellyfish");
 			}
 			else if(e.getSource() == slimePink0) {
 				characterType[0] = SlimeType.PINK;
 				if(setP1) {
 					slimePink1.setVisible(false);
 					slimeLabels1[1].setVisible(false);
-					slimeGroup1.setSelected(slimeGreen1.getModel(), true);
+					if(slimeGroup1.getSelection() == slimePink1.getModel())
+						slimeGroup1.setSelected(slimeGreen1.getModel(), true);
 				}
-				name[0].setText("Pink Slime");
+				name[0].setText("Panas");
 			}
 			else if(e.getSource() == slimeBlue0) {
 				characterType[0] = SlimeType.BLUE;
 				if(setP1) {
 					slimeBlue1.setVisible(false);
 					slimeLabels1[2].setVisible(false);
-					slimeGroup1.setSelected(slimeGreen1.getModel(), true);
+					if(slimeGroup1.getSelection() == slimeBlue1.getModel())
+						slimeGroup1.setSelected(slimeGreen1.getModel(), true);
 				}
-				name[0].setText("Blue Slime");
+				name[0].setText("Waterball");
 			}
 			else if(e.getSource() == slimeHat0) {
 				characterType[0] = SlimeType.HAT;
 				if(setP1) {
 					slimeHat1.setVisible(false);
 					slimeLabels1[3].setVisible(false);
-					slimeGroup1.setSelected(slimeGreen1.getModel(), true);
+					if(slimeGroup1.getSelection() == slimeHat1.getModel())
+						slimeGroup1.setSelected(slimeGreen1.getModel(), true);
 				}
-				name[0].setText("Hat Slime");
+				name[0].setText("Smurf");
 			}
 		}		
 	}
@@ -389,29 +396,29 @@ public class CharacterFrame extends JFrame{
 		public void itemStateChanged(ItemEvent e) {
 			if(e.getSource() == slimeGreen1) {
 				characterType[1] = SlimeType.GREEN;
-				name[1].setText("Green Slime");
+				name[1].setText("Jellyfish");
 			}
 			else if(e.getSource() == slimePink1) {
 				characterType[1] = SlimeType.PINK;
-				name[1].setText("Pink Slime");
+				name[1].setText("Panas");
 			}
 			else if(e.getSource() == slimeBlue1) {
 				characterType[1] = SlimeType.BLUE;
-				name[1].setText("Blue Slime");
+				name[1].setText("Waterball");
 			}
 			else if(e.getSource() == slimeHat1) {
 				characterType[1] = SlimeType.HAT;
-				name[1].setText("Hat Slime");
+				name[1].setText("Smurf");
 			}
 		}		
 	}
 
 	
-	public static void main(String[] args) {
-		CharacterFrame f = new CharacterFrame(1200, 800);
-		f.init();
-		f.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		CharacterFrame f = new CharacterFrame(1200, 800);
+//		f.init();
+//		f.setVisible(true);
+//	}
 }
 
 enum SlimeType {
